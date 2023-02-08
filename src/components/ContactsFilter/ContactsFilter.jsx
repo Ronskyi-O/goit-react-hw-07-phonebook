@@ -4,18 +4,18 @@ import { setFilter } from 'redux/contacts.slice'
 import { FilterLabel } from './ContactsFilter.styled'
 
 export const ContactsFilter = () => {
-    const filter = useSelector((state) => state.contacts.filter)
+    const query = useSelector((state) => state.contacts.query)
     const dispatch = useDispatch()
 
-    const onFilterChange = filter => {
-        dispatch(setFilter(filter))
+    const onFilterChange = query => {
+        dispatch(setFilter(query))
     }
 
     return (
         <FilterLabel>Find contacts by name
             <input
                 type="text"
-                value={filter}
+                value={query}
                 onChange={(event) => onFilterChange(event.currentTarget.value)}
             />
         </FilterLabel>
