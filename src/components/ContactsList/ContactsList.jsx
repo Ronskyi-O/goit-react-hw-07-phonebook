@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { STATUS } from 'redux/contacts.status'
 import { fetchContacts } from 'redux/contacts.thunk'
 // import { deleteContact } from 'redux/contacts.slice'
-// import { selectFilteredContacts } from 'redux/selector'
+import { selectFilteredContacts } from 'redux/selector'
 import { Loader } from 'components/Loader/Loader'
 
 import { ContsctList, ContactItem, ContactItemInfo, ContactItemButton } from './ContactsList.styled'
@@ -12,9 +12,9 @@ import { ContsctList, ContactItem, ContactItemInfo, ContactItemButton } from './
 export const ContactsList = () => {
 
 
-    // const filteredContacts = useSelector(selectFilteredContacts)
+    const filteredContacts = useSelector(selectFilteredContacts)
     const dispatch = useDispatch()
-    const { contacts, status } = useSelector(state => state.contacts)
+    const { status } = useSelector(state => state.contacts)
 
     useEffect(() => {
         dispatch(fetchContacts())
@@ -27,7 +27,7 @@ export const ContactsList = () => {
         <ContsctList>
             {(status === STATUS.idle || status === STATUS.loading) && <Loader />}
             {status === STATUS.error && <p>Вибачте, сталася помилка</p>}
-            {contacts?.map(({ id, name, phone, }) => (
+            {filteredContacts?.map(({ id, name, phone, }) => (
                 <ContactItem key={id}>
                     <ContactItemInfo>{name}: {phone}</ContactItemInfo>
                     <ContactItemButton onClick={() => onDeleteContact(id)}>Delete</ContactItemButton>

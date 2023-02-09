@@ -7,6 +7,9 @@ export const contactsSlice = createSlice({
     name: "contacts",
     initialState: contactsInitState,
     reducers: {
+        setQuery: (state, action) => {
+            state.query = action.payload;
+        },
     },
     extraReducers: {
         [fetchContacts.pending]: state => {
@@ -21,5 +24,6 @@ export const contactsSlice = createSlice({
         },
     }
 })
+export const { setQuery } = contactsSlice.actions;
 
 export const contactsReducer = contactsSlice.reducer
