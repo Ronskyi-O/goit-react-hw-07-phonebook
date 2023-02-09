@@ -1,11 +1,11 @@
 
-import { Loader } from 'components/Loader/Loader'
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { STATUS } from 'redux/contacts.status'
-import { contactsAsyncThunk } from 'redux/contacts.thunk'
+import { fetchContacts } from 'redux/contacts.thunk'
 // import { deleteContact } from 'redux/contacts.slice'
 // import { selectFilteredContacts } from 'redux/selector'
+import { Loader } from 'components/Loader/Loader'
 
 import { ContsctList, ContactItem, ContactItemInfo, ContactItemButton } from './ContactsList.styled'
 
@@ -17,7 +17,7 @@ export const ContactsList = () => {
     const { contacts, status } = useSelector(state => state.contacts)
 
     useEffect(() => {
-        dispatch(contactsAsyncThunk)
+        dispatch(fetchContacts())
     }, [dispatch])
     const onDeleteContact = id => {
         // dispatch(deleteContact(id))
